@@ -36,7 +36,7 @@ As an user, I want the ability to...
 - Remove my ratings from others pets
 
 # Wireframes/Screenshots
-!(IMG_6407.jpg)
+![Wireframes](IMG_6407.jpg)
 
 # Entity Relationship Diagrams (ERDs)
-!(IMG_6408.jpg)
+![ERD](IMG_6408.jpg)
