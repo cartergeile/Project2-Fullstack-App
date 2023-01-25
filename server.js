@@ -5,6 +5,12 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 require('dotenv').config()
+const path = require('path')
+
+/*-----------------------*/
+// IMPORT MODELS        //
+/*----------------------*/
+const Pet = require('./models/pet')
 
 /*-----------------------*/
 // DATABASE CONNECTION   //
@@ -32,8 +38,39 @@ mongoose.connection
 /*--------------------------------*/
 const app = express()
 
+/*-----------------------*/
+// MIDDLEWARE           //
+/*----------------------*/
+app.use(morgan('tiny'))
+app.use(express.urlencoded({ extended: true}))
+app.use(express.static('public'))
+app.use(express.json())
 
+/*-----------------------*/
+// ROUTES               //
+/*----------------------*/
+app.get('/', (req, res) => {
+  res.send('Server is live ready for requests')
+})
 
+// build seed route, some starter pets
+app.get('/pets/seed', (req, res) => {
+  const startPets = [
+    { name: 'Sherman', type: 'dog', color: 'white/brown', age: 12 },
+    { name: 'Cody', type: 'dog', color: 'white/black', age: 7 },
+    { name: 'Boots', type: 'cat', color: 'grey', age: 10 },
+    { name: 'Tigger', type: 'cat', color: 'brown', age: 11 },
+  ]
+  Pet.deleteMany({})
+    .then(() => {
+      Pet.create(startPets)
+        .then(data => {
+          res.json(data)
+        })
+        .catch(err => console.log('the following error occured: \n', err))
+    })
+    
+})
 
 
 /*-----------------------*/
