@@ -13,29 +13,14 @@ const router = express.Router()
 // ROUTES               //
 /*----------------------*/
 
-// build seed route, some starter pets
-router.get('/seed', (req, res) => {
-  const startPets = [
-    { name: 'Sherman', type: 'dog', color: 'white and brown', age: 12 },
-    { name: 'Cody', type: 'dog', color: 'white and black', age: 7 },
-    { name: 'Boots', type: 'cat', color: 'grey', age: 10 },
-    { name: 'Tigger', type: 'cat', color: 'brown', age: 11 },
-  ]
-  Pet.deleteMany({})
-    .then(() => {
-      Pet.create(startPets)
-        .then(data => {
-          res.json(data)
-        })
-        .catch(err => console.log('the following error occured: \n', err))
-    })    
-})
-
 // INDEX route -> displays all pets
 router.get('/', (req, res) => {
   Pet.find({})
   .then(pets => { res.json({ pets : pets })})
-  .catch(err => console.log('the following error occured: \n', err))
+  .catch(err => {
+    console.log(err)
+    res.status(404).json(err)
+  })
 })
 
 // CREATE route -> creates a new document in the database
@@ -45,7 +30,10 @@ router.post('/', (req, res) => {
     .then(pet => {
       res.status(201).json({ pet: pet.toObject() })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      res.status(404).json(err)
+    })
 })
 
 // UPDATE(PUT) -> updates a specific pet
@@ -57,7 +45,10 @@ router.put('/:id', (req, res) => {
       console.log('the newly updated pet', pet)
       res.sendStatus(204)
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      res.status(404).json(err)
+    })
 })
 
 // DELETE -> delete a specific pet
@@ -67,7 +58,10 @@ router.delete('/:id', (req, res) => {
     .then(() => {
       res.sendStatus(204)
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      res.status(404).json(err)
+    })
 })
 
 
@@ -78,7 +72,10 @@ router.get('/:id', (req, res) => {
     .then(pet => {
       res.json({ pet: pet })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      res.status(404).json(err)
+    })
 })
 
 
