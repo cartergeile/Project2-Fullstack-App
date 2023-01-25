@@ -25,6 +25,7 @@ router.get('/', (req, res) => {
 
 // CREATE route -> creates a new document in the database
 router.post('/', (req, res) => {
+  req.body.owner = req.session.userId
   const newPet = req.body
   Pet.create(newPet)
     .then(pet => {
@@ -33,6 +34,19 @@ router.post('/', (req, res) => {
     .catch(err => {
       console.log(err)
       res.status(404).json(err)
+    })
+})
+
+// GET -> INDEX/MINE
+router.get('/mine', (req, res) => {
+  Pet.find({ owner: req.session.userId })
+    .populate('owner', 'username')
+    .then(pets => {
+      res.status(200).json({ pets: pets })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(400).json(err)
     })
 })
 
@@ -47,7 +61,7 @@ router.put('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(404).json(err)
+      res.status(400).json(err)
     })
 })
 
@@ -60,7 +74,7 @@ router.delete('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(404).json(err)
+      res.status(400).json(err)
     })
 })
 
@@ -74,7 +88,7 @@ router.get('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(404).json(err)
+      res.status(400).json(err)
     })
 })
 
