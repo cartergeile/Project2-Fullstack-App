@@ -68,10 +68,15 @@ app.get('/pets/seed', (req, res) => {
           res.json(data)
         })
         .catch(err => console.log('the following error occured: \n', err))
-    })
-    
+    })    
 })
 
+// index route -> displays all pets
+app.get('/pets', (req, res) => {
+  Pet.find({})
+  .then(pets => { res.json({ pets : pets })})
+  .catch(err => console.log('the following error occured: \n', err))
+})
 
 /*-----------------------*/
 // SERVER LISTENER      //
