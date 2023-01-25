@@ -16,6 +16,7 @@ const router = express.Router()
 // INDEX route -> displays all pets
 router.get('/', (req, res) => {
   Pet.find({})
+  .populate('owner', '-password')
   .then(pets => { res.json({ pets : pets })})
   .catch(err => {
     console.log(err)
