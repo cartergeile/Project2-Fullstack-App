@@ -101,6 +101,15 @@ app.put('/pets/:id', (req, res) => {
 })
 
 // DELETE -> delete a specific pet
+app.delete('/pets/:id', (req, res) => {
+  const id = req.params.id
+  Pet.findByIdAndRemove(id)
+    .then(() => {
+      res.sendStatus(204)
+    })
+    .catch(err => console.log(err))
+})
+
 
 // SHOW route -> finds and displays single resource
 app.get('/pets/:id', (req, res) => {
