@@ -88,6 +88,19 @@ app.post('/pets', (req, res) => {
     .catch(err => console.log(err))
 })
 
+// UPDATE(PUT) -> updates a specific pet
+app.put('/pets/:id', (req, res) => {
+  const id = req.params.id
+  const updatedPet = req.body
+  Pet.findByIdAndUpdate(id, updatedPet, { new: true })
+    .then(pet => {
+      console.log('the newly updated pet', pet)
+      res.sendStatus(204)
+    })
+    .catch(err => console.log(err))
+})
+
+// DELETE -> delete a specific pet
 
 // SHOW route -> finds and displays single resource
 app.get('/pets/:id', (req, res) => {
