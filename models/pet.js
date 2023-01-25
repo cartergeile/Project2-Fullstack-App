@@ -7,11 +7,23 @@ const mongoose = require('../utils/connection')
 const { Schema, model } = mongoose
 
 const petSchema = new Schema({
-  name: String,
-  type: String,
-  color: String,
-  age: Number
-})
+  name: {
+    type: String
+  },
+  type: {
+    type: String
+  },
+  color: {
+    type: String
+  },
+  age: {
+    type: Number
+  },
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+}, { timestamps: true })
 
 const Pet = model('Pet', petSchema)
 
