@@ -53,11 +53,14 @@ router.get('/mine', (req, res) => {
 // UPDATE(PUT) -> updates a specific pet
 router.put('/:id', (req, res) => {
   const id = req.params.id
-  const updatedPet = req.body
-  Pet.findByIdAndUpdate(id, updatedPet, { new: true })
+  Pet.findById(id)
     .then(pet => {
-      console.log('the newly updated pet', pet)
-      res.sendStatus(204)
+      if (pet.owner == req.session.userId) {
+        res.sendStatus(204)
+        return pet.updateOne(req.body)
+      } else {
+        res.sendStatus(401)
+      }
     })
     .catch(err => {
       console.log(err)
@@ -68,9 +71,14 @@ router.put('/:id', (req, res) => {
 // DELETE -> delete a specific pet
 router.delete('/:id', (req, res) => {
   const id = req.params.id
-  Pet.findByIdAndRemove(id)
-    .then(() => {
-      res.sendStatus(204)
+  Pet.findById(id)
+    .then(pet => {
+      if (pet.owner == req.session.userId) {
+        res.sendStatus(204)
+        return pet.deleteOne()
+      } else {
+        res.sendStatus(401)
+      }
     })
     .catch(err => {
       console.log(err)
