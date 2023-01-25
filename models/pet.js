@@ -1,7 +1,7 @@
 /*-----------------------*/
 // SCHEMA AND MODEL     //
 /*----------------------*/
-const mongoose = require('mongoose')
+const mongoose = require('../utils/connection')
 
 // destructure the schema and model function
 const { Schema, model } = mongoose
