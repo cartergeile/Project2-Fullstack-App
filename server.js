@@ -7,11 +7,7 @@ const morgan = require('morgan')
 require('dotenv').config()
 const path = require('path')
 const PetRouter = require('./controllers/petControllers')
-
-/*-----------------------*/
-// IMPORT MODELS        //
-/*----------------------*/
-const Pet = require('./models/pet')
+const middleware = require('./utils/middleware')
 
 
 /*---------------------------------*/
@@ -22,10 +18,7 @@ const app = express()
 /*-----------------------*/
 // MIDDLEWARE           //
 /*----------------------*/
-app.use(morgan('tiny'))
-app.use(express.urlencoded({ extended: true}))
-app.use(express.static('public'))
-app.use(express.json())
+middleware(app)
 
 /*-----------------------*/
 // ROUTES               //
