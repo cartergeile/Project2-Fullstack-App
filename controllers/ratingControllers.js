@@ -29,7 +29,7 @@ router.post('/:petId', (req, res) => {
       })
       .catch(err => {
         console.log(err)
-        res.status(404).json(err)       
+        res.status(400).json(err)       
       })
   } else {
     res.sendStatus(401)
@@ -56,7 +56,7 @@ router.delete('/delete/:petId/:ratingId', (req, res) => {
   })
   .catch(err => {
     console.log(err)
-    res.status(404).json(err) 
+    res.status(400).json(err) 
   })
 })
 

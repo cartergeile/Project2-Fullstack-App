@@ -9,8 +9,8 @@ const ratingSchema = new Schema({
   rating: {
     type: Number,
     required: true,
-    minimum: 0,
-    maximum: 10
+    min: 0,
+    max: 10
   }, 
   author: {
     type: Schema.Types.ObjectId,

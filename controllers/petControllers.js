@@ -17,6 +17,7 @@ const router = express.Router()
 router.get('/', (req, res) => {
   Pet.find({})
   .populate('owner', '-password')
+  .populate('ratings.author', '-password')
   .then(pets => { res.json({ pets : pets })})
   .catch(err => {
     console.log(err)
@@ -42,6 +43,7 @@ router.post('/', (req, res) => {
 router.get('/mine', (req, res) => {
   Pet.find({ owner: req.session.userId })
     .populate('owner', 'username')
+    .populate('ratings.author', '-password')
     .then(pets => {
       res.status(200).json({ pets: pets })
     })
@@ -92,6 +94,7 @@ router.delete('/:id', (req, res) => {
 router.get('/:id', (req, res) => {
   const id = req.params.id
   Pet.findById(id)
+  .populate('ratings.author', 'username')
     .then(pet => {
       res.json({ pet: pet })
     })

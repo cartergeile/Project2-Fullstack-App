@@ -26,7 +26,8 @@ middleware(app)
 // ROUTES               //
 /*----------------------*/
 app.get('/', (req, res) => {
-  res.send('Server is live ready for requests')
+  const {username, loggedIn, userId} = req.session
+  res.render('home.liquid', {username, loggedIn, userId})
 })
 
 // register routes
