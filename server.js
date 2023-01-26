@@ -8,6 +8,7 @@ require('dotenv').config()
 const path = require('path')
 const PetRouter = require('./controllers/petControllers')
 const UserRouter = require('./controllers/userControllers')
+const RatingRouter = require('./controllers/ratingControllers')
 const middleware = require('./utils/middleware')
 
 
@@ -31,6 +32,7 @@ app.get('/', (req, res) => {
 // register routes
 app.use('/pets', PetRouter)
 app.use('/users', UserRouter)
+app.use('/ratings', RatingRouter)
 
 /*-----------------------*/
 // SERVER LISTENER      //

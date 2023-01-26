@@ -8,7 +8,9 @@ const { Schema } = mongoose
 const ratingSchema = new Schema({
   rating: {
     type: Number,
-    required: true
+    required: true,
+    minimum: 0,
+    maximum: 10
   }, 
   author: {
     type: Schema.Types.ObjectId,
