@@ -15,13 +15,16 @@ const router = express.Router()
 
 // INDEX route -> displays all pets
 router.get('/', (req, res) => {
+  const { username, loggedIn, userId} = req.session
   Pet.find({})
   .populate('owner', '-password')
   .populate('ratings.author', '-password')
-  .then(pets => { res.json({ pets : pets })})
+  .then(pets => { 
+    res.render('pets/index', { pets, username, loggedIn, userId })
+  })
   .catch(err => {
     console.log(err)
-    res.status(404).json(err)
+    res.redirect(`/error?error=${err}`)
   })
 })
 
@@ -35,7 +38,7 @@ router.post('/', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(404).json(err)
+      res.redirect(`/error?error=${err}`)
     })
 })
 
@@ -49,7 +52,7 @@ router.get('/mine', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(400).json(err)
+      res.redirect(`/error?error=${err}`)
     })
 })
 
@@ -67,7 +70,7 @@ router.put('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(400).json(err)
+      res.redirect(`/error?error=${err}`)
     })
 })
 
@@ -85,7 +88,7 @@ router.delete('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(400).json(err)
+      res.redirect(`/error?error=${err}`)
     })
 })
 
@@ -100,7 +103,7 @@ router.get('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(400).json(err)
+      res.redirect(`/error?error=${err}`)
     })
 })
 

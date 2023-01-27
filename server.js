@@ -12,10 +12,12 @@ const RatingRouter = require('./controllers/ratingControllers')
 const middleware = require('./utils/middleware')
 
 
+
 /*---------------------------------*/
 // Create our express app object  //
 /*--------------------------------*/
-const app = express()
+// const app = express()
+const app = require('liquid-express-views')(express())
 
 /*-----------------------*/
 // MIDDLEWARE           //
