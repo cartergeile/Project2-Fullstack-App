@@ -28,13 +28,17 @@ router.get('/', (req, res) => {
   })
 })
 
+// render create page
+router.get('/new', (req, res) => {
+  res.render('pets/new', { ...req.session })
+})
 // CREATE route -> creates a new document in the database
 router.post('/', (req, res) => {
   req.body.owner = req.session.userId
   const newPet = req.body
   Pet.create(newPet)
     .then(pet => {
-      res.status(201).json({ pet: pet.toObject() })
+      res.redirect(`/pets/${pet.id}`)
     })
     .catch(err => {
       console.log(err)
@@ -48,7 +52,7 @@ router.get('/mine', (req, res) => {
     .populate('owner', 'username')
     .populate('ratings.author', '-password')
     .then(pets => {
-      res.status(200).json({ pets: pets })
+      res.render('pets/index', { pets, ...req.session })
     })
     .catch(err => {
       console.log(err)
@@ -99,7 +103,7 @@ router.get('/:id', (req, res) => {
   Pet.findById(id)
   .populate('ratings.author', 'username')
     .then(pet => {
-      res.json({ pet: pet })
+      res.render('pets/show.liquid', { pet, ...req.session })
     })
     .catch(err => {
       console.log(err)

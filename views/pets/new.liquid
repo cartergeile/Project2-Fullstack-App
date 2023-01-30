@@ -1,0 +1,39 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+<div class="container-sm">
+  <form action="/pets" method="POST">
+    <fieldset>
+      <legend>Create New Pet</legend>
+      <label class="form-label">Type:</label>
+      <input 
+          type="text" 
+          class="form-control" 
+          name="type"
+          placeholder="What kind of pet is it?"
+          required>
+      <label class="form-label">Name:</label>
+      <input 
+          type="text" 
+          class="form-control" 
+          name="name"
+          placeholder="What is the name of your pet?"
+          required>
+      <label class="form-label">Color:</label>
+      <input 
+          type="color" 
+          class="form-control" 
+          name="color"
+          placeholder="What color is your pet?"
+          required>
+      <label class="form-label">Age:</label>
+      <input 
+          type="number" 
+          class="form-control" 
+          name="age"
+          placeholder="How old is your pet?"
+          required>
+    </fieldset>
+    <input type="submit" class="btn btn-success mt-3" value="Create Pet">
+  </form>
+</div>
+{% endblock %}
