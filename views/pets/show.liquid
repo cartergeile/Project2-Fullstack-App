@@ -1,13 +1,22 @@
 {% layout 'layout.liquid' %}
 {% block content %}
-    <div class="container-md">
-      <div class="row justify-content-between">
-      <article class="col-5">
-        <h2>{{pet.name}}</h2>
-        <h4>{{pet.name}} is a {{pet.type}}</h4>
-        <h4>The color of {{pet.name}} is {{pet.color}}</h4>
-          <div class="colorBox" style="background-color: {{pet.color}}"></div>
-      </article>
+      <div class="container-md">
+        <div class="row justify-content-between">
+        <article class="col-5">
+          <h2>{{pet.name}}</h2>
+          <h4>{{pet.name}} is a {{pet.type}}</h4>
+          <h4>The color of {{pet.name}} is {{pet.color}}</h4>
+            <div class="colorBox" style="background-color: {{pet.color}}"></div>
+        </article>
+        </div>
       </div>
-    </div>
+    {% if pet.owner == userId %}
+      <hr>
+      <div class="btn-group">
+        <a href="/pets/edit/{{pet.id}}" class="btn btn-primary">Edit {{pet.name}}</a>
+        <form action="/pets/{{pet.id}}?_method=DELETE" method="POST">
+          <input type="submit" class="btn btn-danger" value="Delete {{pet.name}}">
+        </form>
+      </div>
+    {% endif %}
 {% endblock %}

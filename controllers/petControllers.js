@@ -60,17 +60,31 @@ router.get('/mine', (req, res) => {
     })
 })
 
+// render the edit page
+router.get('/edit/:id', (req, res) => {
+  const petId = req.params.id
+  Pet.findById(petId)
+  .then(pet => {
+    res.render('pets/edit', {pet, ...req.session})
+  })
+  .catch(err => {
+    res.redirect(`error?error=${err}`)
+  })
+})
 // UPDATE(PUT) -> updates a specific pet
 router.put('/:id', (req, res) => {
   const id = req.params.id
   Pet.findById(id)
     .then(pet => {
       if (pet.owner == req.session.userId) {
-        res.sendStatus(204)
+        //res.sendStatus(204)
         return pet.updateOne(req.body)
       } else {
-        res.sendStatus(401)
+        res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20edit%20this%20pet`)
       }
+    })
+    .then(() => {
+      res.redirect(`/pets/mine`)
     })
     .catch(err => {
       console.log(err)
@@ -87,8 +101,11 @@ router.delete('/:id', (req, res) => {
         res.sendStatus(204)
         return pet.deleteOne()
       } else {
-        res.sendStatus(401)
+        res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20fruit`)
       }
+    })
+    .then(() => {
+      res.redirect('/pets/mine')
     })
     .catch(err => {
       console.log(err)
