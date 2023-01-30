@@ -37,6 +37,17 @@ app.use('/pets', PetRouter)
 app.use('/users', UserRouter)
 app.use('/ratings', RatingRouter)
 
+// error page
+app.get('/error', (req, res) => {
+  const error = req.query.error || 'thos page does not exist'
+  const {username, loggedIn, UserId} = req.session
+  res.render('error.liquid', {error, ...req.session})
+})
+
+// catch all
+app.all('*', (req, res) => {
+  res.redirect('/error')
+})
 /*-----------------------*/
 // SERVER LISTENER      //
 /*----------------------*/

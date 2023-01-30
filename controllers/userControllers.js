@@ -13,6 +13,10 @@ const router = express.Router()
 /*-----------------------*/
 // ROUTES               //
 /*----------------------*/
+// render signup page
+router.get('/signup', (req, res) => {
+  res.render('users/signup')
+})
 // POST -> /users/signup
 router.post('/signup', async (req, res) => {
   const newUser = req.body
@@ -24,14 +28,19 @@ router.post('/signup', async (req, res) => {
   User.create(newUser)
     .then(user => {
       //console.log(user)
-      res.status(201).json({ username: user.username })
+      res.redirect('/users/login')
     })
     .catch(err => {
       console.log(err)
-      res.json(err)
+      res.redirect(`/error?error=username%20taken`)
     })
 })
 
+
+// render to login page
+router.get('/login', (req, res) => {
+  res.render('users/login')
+})
 // POST -> /users/login
 router.post('/login', async (req, res) => {
   const { username, password } = req.body
@@ -44,25 +53,29 @@ router.post('/login', async (req, res) => {
             req.session.loggedIn = true
             req.session.userId = user.id
             //console.log(req.session)
-            res.status(201).json({ username: user.username })
+            res.redirect('/')
           } else {
-            res.json({ error: 'username or password is incorrect' })
+            res.redirect(`/error?error=username%20or%20password%20is%20incorrect`)
           }
       } else {
-        res.json({ error: 'user does not exist' })
+        res.redirect(`/error?error=user%20does%20not%20exist`)
       }
     })
     .catch(err => {
       console.log(err)
-      res.json(err)
+      res.redirect(`/error?error${err}`)
     })
 })
 
+//render logout page
+router.get('/logout', (req, res) => {
+  res.render('users/logout')
+})
 // DELETE -> /users/logout
 router.delete('/logout', (req, res) => {
   req.session.destroy(err => {
     //console.log(req.session)
-    res.sendStatus(204)
+    res.redirect('/')
   })
 })
 
