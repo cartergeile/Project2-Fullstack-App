@@ -98,7 +98,7 @@ router.delete('/:id', (req, res) => {
   Pet.findById(id)
     .then(pet => {
       if (pet.owner == req.session.userId) {
-        res.sendStatus(204)
+        //res.sendStatus(204)
         return pet.deleteOne()
       } else {
         res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20fruit`)

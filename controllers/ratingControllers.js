@@ -30,7 +30,7 @@ router.post('/:petId', (req, res) => {
       })
       .catch(err => {
         console.log(err)
-        res.redirect(`/error?error=${err}`)      
+        res.redirect(`/error?error=Please%20make%20the%20rating%20between%201%20and%2010`)      
       })
   } else {
     //res.sendStatus(401)

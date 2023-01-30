@@ -39,7 +39,7 @@ app.use('/ratings', RatingRouter)
 
 // error page
 app.get('/error', (req, res) => {
-  const error = req.query.error || 'thos page does not exist'
+  const error = req.query.error || 'This page does not exist'
   const {username, loggedIn, UserId} = req.session
   res.render('error.liquid', {error, ...req.session})
 })

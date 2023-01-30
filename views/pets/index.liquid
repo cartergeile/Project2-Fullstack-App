@@ -2,13 +2,14 @@
 {% block content %}
 {% if pets.length > 0 %}
 <div class="container-md">
-  <h2>All Pets</h2>
+  <h2>Pets</h2>
   <div class="row">
       {% for pet in pets %}
           <div class="card me-3 mb-3" style="width: 18rem">
             <h5 class="card-header">{{pet.name}}</h5>
             <div class="card-body">
-              <p class="card-text">The color of this {{pet.type}} is {{pet.color}}</p>
+              <p class="card-text">{{pet.name}} is a {{pet.type}}</p>
+              <p class="card-text">{{pet.name}} is {{pet.color}}</p>
               <p class="card-text">{{pet.name}} is {{pet.age}} years old.</p>
               <div class="colorBox mb-2" style="background-color: {{pet.color}}"></div>
               <a href="/pets/{{pet.id}}" class="btn btn-info">View {{pet.name}}</a>

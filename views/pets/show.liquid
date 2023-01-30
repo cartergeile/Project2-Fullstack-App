@@ -9,14 +9,16 @@
             <div class="colorBox" style="background-color: {{pet.color}}"></div>
         </article>
         </div>
-    {% if pet.owner == userId %}
-      <hr>
-      <div class="btn-group">
-        <a href="/pets/edit/{{pet.id}}" class="btn btn-primary">Edit {{pet.name}}</a>
-        <form action="/pets/{{pet.id}}?_method=DELETE" method="POST">
-          <input type="submit" class="btn btn-danger" value="Delete {{pet.name}}">
-        </form>
-      </div>
+    {% if loggedIn %}
+      {% if pet.owner == userId %}
+        <hr>
+        <div class="btn-group">
+          <a href="/pets/edit/{{pet.id}}" class="btn btn-primary">Edit {{pet.name}}</a>
+          <form action="/pets/{{pet.id}}?_method=DELETE" method="POST">
+            <input type="submit" class="btn btn-danger" value="Delete {{pet.name}}">
+          </form>
+        </div>
+      {% endif %}
     {% endif %}
       <hr>
       <h3>Ratings:</h3>
