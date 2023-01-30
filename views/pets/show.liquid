@@ -9,7 +9,6 @@
             <div class="colorBox" style="background-color: {{pet.color}}"></div>
         </article>
         </div>
-      </div>
     {% if pet.owner == userId %}
       <hr>
       <div class="btn-group">
@@ -19,4 +18,34 @@
         </form>
       </div>
     {% endif %}
+      <hr>
+      <h3>Ratings:</h3>
+      <hr>
+      {% if loggedIn %}
+          <div class="col-md-6">
+            <form action="/ratings/{{pet.id}}" method="POST">
+              <fieldset>
+                <legend>Add Rating</legend>
+                <label class="form-label">Rating</label>
+                <input type="number" name="rating" class="form-control mb-1">
+              </fieldset>
+              <input type="submit" class="btn btn-success" value="Add Rating">
+            </form>
+          </div>
+      {% else %}
+          <div class="col-md-6">  
+            <small>If you would like to rate pets, please log in...</small>
+          </div>
+      {% endif %}
+      <hr>
+      {% if pet.ratings.length > 0 %}
+        <div class="container-sm justify-content-center">
+          {% for rating in pet.ratings %}
+            {% render '../rating.liquid', rating: rating, userId: userId, pet: pet %}
+          {% endfor %}
+        </div>
+      {% else %}
+          <small>No Ratings yet... go create some!</small>
+      {% endif %}
+    </div>
 {% endblock %}

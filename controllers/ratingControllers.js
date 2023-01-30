@@ -25,14 +25,16 @@ router.post('/:petId', (req, res) => {
         return pet.save()
       })
       .then(pet => {
-        res.status(201).json({ pet: pet })
+        //res.status(201).json({ pet: pet })
+        res.redirect(`/pets/${pet.id}`)
       })
       .catch(err => {
         console.log(err)
-        res.status(400).json(err)       
+        res.redirect(`/error?error=${err}`)      
       })
   } else {
-    res.sendStatus(401)
+    //res.sendStatus(401)
+    res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20rate%20this%20pet`)
   }
 })
 
@@ -46,17 +48,20 @@ router.delete('/delete/:petId/:ratingId', (req, res) => {
       if (theRating.author == req.session.userId) {
         theRating.remove()
         pet.save()
-        res.sendStatus(204)
+        //res.sendStatus(204)
+        res.redirect(`/pets/${pet.id}`)
       } else {
-        res.sendStatus(401)
+        //res.sendStatus(401)
+        res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20rating`)
       }
     } else {
-      res.sendStatus(401)
+      //res.sendStatus(401)
+      (`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20rating`)
     }
   })
   .catch(err => {
     console.log(err)
-    res.status(400).json(err) 
+    res.redirect(`/error?error${err}`)
   })
 })
 
