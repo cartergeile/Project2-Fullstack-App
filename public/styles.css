@@ -1,3 +1,4 @@
+
 .colorBox {
   height: 25px;
   width: 75%;
@@ -6,4 +7,9 @@
 
 .navbar-collapse {
   justify-content: flex-end;
+}
+
+.custombg {
+  background: black url('../images/petz2.jpeg');
+  background-size: cover;
 }

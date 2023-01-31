@@ -3,9 +3,9 @@
       <div class="container-md">
         <div class="row justify-content-between">
         <article class="col-5">
-          <h2>{{pet.name}}</h2>
-          <h4>{{pet.name}} is a {{pet.type}}</h4>
-          <h4>The color of {{pet.name}} is {{pet.color}}</h4>
+          <h2 style="color: white">{{pet.name}}</h2>
+          <h4 style="color: white">{{pet.name}} is a {{pet.type}}</h4>
+          <h4 style="color: white">The color of {{pet.name}} is {{pet.color}}</h4>
             <div class="colorBox" style="background-color: {{pet.color}}"></div>
         </article>
         </div>
@@ -21,14 +21,14 @@
       {% endif %}
     {% endif %}
       <hr>
-      <h3>Ratings:</h3>
+      <h3 style="color: white">Ratings:</h3>
       <hr>
       {% if loggedIn %}
           <div class="col-md-6">
             <form action="/ratings/{{pet.id}}" method="POST">
               <fieldset>
-                <legend>Add Rating</legend>
-                <label class="form-label">Rating</label>
+                <legend style="color: white">Add Rating</legend>
+                <label class="form-label" style="color: white">Rating</label>
                 <input type="number" name="rating" class="form-control mb-1">
               </fieldset>
               <input type="submit" class="btn btn-success" value="Add Rating">
@@ -36,7 +36,7 @@
           </div>
       {% else %}
           <div class="col-md-6">  
-            <small>If you would like to rate pets, please log in...</small>
+            <small style="color: white">If you would like to rate pets, please log in...</small>
           </div>
       {% endif %}
       <hr>
@@ -47,7 +47,7 @@
           {% endfor %}
         </div>
       {% else %}
-          <small>No Ratings yet... go create some!</small>
+          <small style="color: white">No Ratings yet... go create some!</small>
       {% endif %}
     </div>
 {% endblock %}

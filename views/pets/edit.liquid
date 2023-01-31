@@ -3,8 +3,8 @@
 <div class="container-sm">
   <form action="/pets/{{pet.id}}?_method=PUT" method="POST">
     <fieldset>
-      <legend>Edit {{pet.name}}</legend>
-      <label class="form-label">Type:</label>
+      <legend style="color: white">Edit {{pet.name}}</legend>
+      <label class="form-label" style="color: white">Type:</label>
       <input 
           type="text" 
           class="form-control" 
@@ -12,7 +12,7 @@
           placeholder="What kind of pet is it?"
           required
           value="{{pet.type}}">
-      <label class="form-label">Name:</label>
+      <label class="form-label" style="color: white">Name:</label>
       <input 
           type="text" 
           class="form-control" 
@@ -20,7 +20,7 @@
           placeholder="What is the name of your pet?"
           required
           value="{{pet.name}}">
-      <label class="form-label">Color:</label>
+      <label class="form-label" style="color: white">Color:</label>
       <input 
           type="color" 
           class="form-control" 
@@ -28,7 +28,7 @@
           placeholder="What color is your pet?"
           required 
           value="{{fruit.color}}">
-      <label class="form-label">Age:</label>
+      <label class="form-label" style="color: white">Age:</label>
       <input 
           type="number" 
           class="form-control" 
