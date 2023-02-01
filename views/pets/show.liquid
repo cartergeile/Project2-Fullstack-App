@@ -11,7 +11,7 @@
         </div>
     {% if loggedIn %}
       {% if pet.owner == userId %}
-        <hr>
+        <hr style="color: white">
         <div class="btn-group">
           <a href="/pets/edit/{{pet.id}}" class="btn btn-primary">Edit {{pet.name}}</a>
           <form action="/pets/{{pet.id}}?_method=DELETE" method="POST">
@@ -22,7 +22,7 @@
     {% endif %}
       <hr>
       <h3 style="color: white">Ratings:</h3>
-      <hr>
+      <hr style="color: white">
       {% if loggedIn %}
           <div class="col-md-6">
             <form action="/ratings/{{pet.id}}" method="POST">
@@ -39,7 +39,7 @@
             <small style="color: white">If you would like to rate pets, please log in...</small>
           </div>
       {% endif %}
-      <hr>
+      <hr style="color: white">
       {% if pet.ratings.length > 0 %}
         <div class="container-sm justify-content-center">
           {% for rating in pet.ratings %}
